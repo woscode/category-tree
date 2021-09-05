@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="Category + ' ' + ${category.name}">Category</title>
+</head>
+
+<body>
+
+<div class="category">
+    <table>
+        <thead>
+            <tr>
+                <th> ID </th>
+                <th> Category </th>
+                <th th:unless="${category.isRoot()}"> Belong to </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:object="${category}">
+                <td><span th:text="${category.id}"> ID </span></td>
+                <td><span th:text="${category.name}"> Name </span></td>
+                <td th:unless="${category.isRoot()}"><span th:text="${category.parent.name}"> Belong to </span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br />
+    <a th:href="@{/{id}/edit(id=${category.id})}"> Edit </a>
+    <br />
+    <hr>
+    <form th:method="DELETE" th:action="@{/{id}(id=${category.id})}">
+        <input type="submit" value="Delete" />
+    </form>
+</div>
+
+<br />
+<hr>
+<a th:href="@{/}"> Back to main page </a>
+
+</body>
+</html>

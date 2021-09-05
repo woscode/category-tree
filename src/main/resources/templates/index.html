@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Category Tree Table</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="categories_empty" th:if="${categories.isEmpty()}">
+    <b>No Categories Available</b>
+</div>
+
+<div class="categories" th:unless="${categories.isEmpty()}">
+     <table>
+        <thead>
+        <tr>
+            <th> ID </th>
+            <th> Name </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="category : ${categories}">
+            <td><span th:text="${category.getId()}"> ID </span></td>
+            <td><a th:href="@{/{id}(id=${category.getId()})}" th:text="${category.getName()}"> Name </a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<br />
+
+<div class="addcategory">
+    <a th:href="@{/new}"> Create new category</a>
+</div>
+
+</body>
+</html>
